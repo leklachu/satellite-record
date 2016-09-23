@@ -51,7 +51,8 @@ satelliteURL day year = "http://map2.vis.earthdata.nasa.gov/imagegen/index.php?T
   where day' | day <  10 = "00" ++ show day
              | day < 100 = "0"  ++ show day
              | otherwise = show day
-satellitePath day year = "/home/x/multimedia/pictures/dolpa satellite/"
+--satellitePath day year = "/home/x/multimedia/pictures/dolpa satellite/"
+satellitePath day year = "image-directory/"
                          ++ show year ++ "/" ++ jot month ++ "/" ++ jot d
                          ++ ".jpg"
   where (d,month) = date day year
@@ -65,7 +66,8 @@ satelliteURLa day year = "http://map2.vis.earthdata.nasa.gov/imagegen/index.php?
   where day' | day <  10 = "00" ++ show day
              | day < 100 = "0"  ++ show day
              | otherwise = show day
-satellitePatha day year = "/home/x/multimedia/pictures/dolpa satellite/"
+--satellitePatha day year = "/home/x/multimedia/pictures/dolpa satellite/"
+satellitePatha day year = "image-directory/"
                           ++ show year ++ "/" ++ jot month ++ "/" ++ jot d
                          ++ "a.jpg"
   where (d,month) = date day year

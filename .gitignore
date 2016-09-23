@@ -1,3 +1,7 @@
+# symlink to image directory
+image-directory
+
+# Haskell stuff
 dist
 dist-*
 cabal-dev
