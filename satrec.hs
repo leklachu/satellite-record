@@ -3,6 +3,10 @@ module Main where
 import FileOps
 import Dates
 
+import qualified Data.ByteString as B
+import Network.HTTP
+import Network.URI (parseURI)
+
 -- Satellites are Terra (crosses N/S in morning) and Aqua (crosses S/N in afternoon)
 
 satelliteURL day year satellite =
@@ -24,9 +28,18 @@ process satellite date = do got <- check satellite date
   where hooray = print $ show date ++ " - is already there"
 
 get satellite date = do putStr $ show date ++ " - getting..."
-                        -- ...
+                        jpg <- fetch url
+                        B.writeFile filename jpg
                         putStrLn "...got."
+  where fetch u = let uri = case parseURI u of
+                        Nothing -> error $ "Invalid URI: " ++ u
+                        Just u -> u
+                  in simpleHTTP (defaultGETRequest_ uri) >>= getResponseBody
+        url = satelliteURL (daynum date) (year date) satellite
+        filename = path "image-directory" (suffix satellite) date
 
+
+-- need to do only up to yesterday!!!!
 processYear year = mapM (process Terra) (theYear year) >> mapM (process Aqua) (theYear year)
 
 main = processYear 2016
