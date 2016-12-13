@@ -23,6 +23,11 @@ isLeapYear 2013 = False
 isLeapYear 2014 = False
 isLeapYear 2015 = False
 isLeapYear 2016 = True
+isLeapYear 2017 = False
+isLeapYear y | mod y 400 == 0 = True
+             | mod y 100 == 0 = False
+             | mod y 4   == 0 = True
+             | otherwise      = False
 
 monthDay d m ms = if d <= monthDays then (d,m)
                else monthDay (d - monthDays) (m+1) (tail ms)
