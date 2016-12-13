@@ -39,6 +39,9 @@ inc (Date d m y i) | m == 12 && d == 31 = Date 1 1 (y+1) 1
 instance Show Date where
   show (Date d m y i) = textNorm d ++ "/" ++ textNorm m ++ "/" ++ show y ++ " - day " ++ show i
 
+theYear year = take ylen $ iterate inc (startIn year)
+  where ylen = if isLeapYear year then 366 else 365
+
 
 startDate = Date 8 5 2012 129
 startIn y = Date 1 1 y 1

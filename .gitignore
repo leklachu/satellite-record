@@ -1,6 +1,9 @@
 # symlink to image directory
 image-directory
 
+# main exe
+satrec
+
 # Haskell stuff
 dist
 dist-*

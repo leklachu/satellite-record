@@ -15,3 +15,18 @@ path prefix suffix (Date d m y i) =
 
 checkGot from = mapM_ (\x -> doesFileExist x >>= print) $ map (path "image-directory" ".jpg") $ take 366 $ iterate inc (startIn from)
 
+data Satellite = Terra | Aqua
+               deriving Eq
+suffix Terra = ".jpg"
+suffix Aqua = "a.jpg"
+
+checkYear year satellite = mapM doesFileExist paths >>=
+                           print.and
+  where paths = map (path "image-directory" (suffix satellite)) $ theYear year
+
+-- prepare year needs createDirectory and doesDirectoryExist. or just createDirectoryIfMissing
+-- also, really should be catching errors!
+-- also want to check for null files.
+
+check satellite date = doesFileExist $ path "image-directory" (suffix satellite) date
+
